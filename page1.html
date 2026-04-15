@@ -2,11 +2,177 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>ページ1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>診療案内 | 日比谷公園前歯科医院</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; color: #333; }
+
+    nav {
+      background: #0d0c0a;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    nav .logo {
+      color: #b89a5a;
+      font-size: 1rem;
+      text-decoration: none;
+      letter-spacing: 0.1em;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    nav ul a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: #b89a5a; }
+
+    .page-hero {
+      background: #0d0c0a;
+      color: white;
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+    .page-hero h1 {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      color: #b89a5a;
+      letter-spacing: 0.05em;
+    }
+
+    .section {
+      padding: 3rem 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .section h2 {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      margin-bottom: 1.5rem;
+      color: #0d0c0a;
+      border-left: 3px solid #b89a5a;
+      padding-left: 0.8rem;
+    }
+
+    .treatment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .treatment-card {
+      border: 0.5px solid #ddd;
+      padding: 1.5rem;
+    }
+    .treatment-card h3 {
+      font-size: 1rem;
+      color: #b89a5a;
+      margin-bottom: 0.5rem;
+    }
+    .treatment-card p {
+      font-size: 0.82rem;
+      color: #666;
+      line-height: 1.8;
+    }
+
+    .img-center {
+      text-align: center;
+      margin: 2rem 0;
+    }
+    .img-center img {
+      width: min(260px, 65vw);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      border: 1px solid #b89a5a;
+      color: #b89a5a;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      margin: 0.4rem;
+      transition: all 0.2s;
+    }
+    .btn:hover { background: #b89a5a; color: #000; }
+
+    footer {
+      background: #0d0c0a;
+      color: #777;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.8rem;
+      line-height: 2;
+    }
+  </style>
 </head>
 <body>
-  <h1>ページ1 - Hello World!</h1>
-  <img src="image1.svg" alt="画像1" width="300">
-  <p><a href="page2.html">ページ2へ →</a></p>
+
+  <nav>
+    <a href="index.html" class="logo">日比谷公園前歯科医院</a>
+    <ul>
+      <li><a href="index.html">トップ</a></li>
+      <li><a href="page1.html">診療案内</a></li>
+      <li><a href="page2.html">アクセス</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <h1>診療案内</h1>
+  </div>
+
+  <div class="section">
+    <div class="img-center">
+      <img src="image1.svg" alt="歯のイラスト">
+    </div>
+
+    <h2>専門治療</h2>
+    <div class="treatment-grid">
+      <div class="treatment-card">
+        <h3>補綴治療</h3>
+        <p>失った歯を補う治療。クラウン・ブリッジ・義歯など、患者さまに最適な補綴物を提供します。</p>
+      </div>
+      <div class="treatment-card">
+        <h3>顎顔面補綴</h3>
+        <p>顎・顔面の欠損に対する補綴治療。専門的な知識と技術で対応します。</p>
+      </div>
+      <div class="treatment-card">
+        <h3>口蓋裂治療</h3>
+        <p>口蓋裂認定師として、専門的な補綴治療を行います。</p>
+      </div>
+    </div>
+
+    <h2>一般診療</h2>
+    <div class="treatment-grid">
+      <div class="treatment-card">
+        <h3>虫歯治療</h3>
+        <p>丁寧な診査・診断のもと、患者さまに合わせた治療を行います。</p>
+      </div>
+      <div class="treatment-card">
+        <h3>歯周病治療</h3>
+        <p>歯を支える組織の健康を守るための治療です。</p>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top: 2rem;">
+      <a href="page2.html" class="btn">アクセスへ →</a>
+      <a href="index.html" class="btn">← トップへ戻る</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>日比谷公園前歯科医院</p>
+    <p>〒xxx-xxxx 東京都千代田区xxx</p>
+    <p>&copy; 2025 Hibiya Park Front Dental Clinic</p>
+  </footer>
+
 </body>
 </html>

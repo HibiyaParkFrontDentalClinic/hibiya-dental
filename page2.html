@@ -2,11 +2,189 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>ページ2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>アクセス | 日比谷公園前歯科医院</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; color: #333; }
+
+    nav {
+      background: #0d0c0a;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    nav .logo {
+      color: #b89a5a;
+      font-size: 1rem;
+      text-decoration: none;
+      letter-spacing: 0.1em;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    nav ul a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: #b89a5a; }
+
+    .page-hero {
+      background: #0d0c0a;
+      color: white;
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+    .page-hero h1 {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      color: #b89a5a;
+      letter-spacing: 0.05em;
+    }
+
+    .section {
+      padding: 3rem 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .section h2 {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      margin-bottom: 1.5rem;
+      color: #0d0c0a;
+      border-left: 3px solid #b89a5a;
+      padding-left: 0.8rem;
+    }
+
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2.5rem;
+      font-size: 0.88rem;
+    }
+    .info-table tr {
+      border-bottom: 0.5px solid #eee;
+    }
+    .info-table td {
+      padding: 0.9rem 0.5rem;
+      line-height: 1.7;
+      vertical-align: top;
+    }
+    .info-table td:first-child {
+      color: #b89a5a;
+      width: 6rem;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .img-center {
+      text-align: center;
+      margin: 2rem 0;
+    }
+    .img-center img {
+      width: min(280px, 70vw);
+    }
+
+    .map-placeholder {
+      background: #f5f5f5;
+      border: 0.5px solid #ddd;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 0.85rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      border: 1px solid #b89a5a;
+      color: #b89a5a;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      margin: 0.4rem;
+      transition: all 0.2s;
+    }
+    .btn:hover { background: #b89a5a; color: #000; }
+
+    footer {
+      background: #0d0c0a;
+      color: #777;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.8rem;
+      line-height: 2;
+    }
+  </style>
 </head>
 <body>
-  <h1>ページ2 - Hello World!</h1>
-  <img src="image2.svg" alt="画像2" width="300">
-  <p><a href="page1.html">← ページ1へ戻る</a></p>
+
+  <nav>
+    <a href="index.html" class="logo">日比谷公園前歯科医院</a>
+    <ul>
+      <li><a href="index.html">トップ</a></li>
+      <li><a href="page1.html">診療案内</a></li>
+      <li><a href="page2.html">アクセス</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-hero">
+    <h1>アクセス</h1>
+  </div>
+
+  <div class="section">
+
+    <div class="img-center">
+      <img src="image2.svg" alt="医院イラスト">
+    </div>
+
+    <h2>診療情報</h2>
+    <table class="info-table">
+      <tr>
+        <td>医院名</td>
+        <td>日比谷公園前歯科医院</td>
+      </tr>
+      <tr>
+        <td>住所</td>
+        <td>〒xxx-xxxx<br>東京都千代田区xxx</td>
+      </tr>
+      <tr>
+        <td>電話</td>
+        <td>03-xxxx-xxxx</td>
+      </tr>
+      <tr>
+        <td>診療時間</td>
+        <td>月〜金：9:00〜18:00<br>土：9:00〜13:00<br>日・祝：休診</td>
+      </tr>
+      <tr>
+        <td>アクセス</td>
+        <td>日比谷駅より徒歩x分<br>霞ヶ関駅より徒歩x分</td>
+      </tr>
+    </table>
+
+    <h2>地図</h2>
+    <div class="map-placeholder">地図をここに埋め込む（Google Maps）</div>
+
+    <div style="text-align:center; margin-top: 1rem;">
+      <a href="page1.html" class="btn">← 診療案内へ</a>
+      <a href="index.html" class="btn">← トップへ戻る</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>日比谷公園前歯科医院</p>
+    <p>〒xxx-xxxx 東京都千代田区xxx</p>
+    <p>&copy; 2025 Hibiya Park Front Dental Clinic</p>
+  </footer>
+
 </body>
 </html>

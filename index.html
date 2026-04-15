@@ -2,13 +2,168 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>日比谷公園前歯科医院</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; color: #333; }
+
+    /* ナビゲーション */
+    nav {
+      background: #0d0c0a;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    nav .logo {
+      color: #b89a5a;
+      font-size: 1rem;
+      text-decoration: none;
+      letter-spacing: 0.1em;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    nav ul a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: #b89a5a; }
+
+    /* ヒーロー */
+    .hero {
+      background: #0d0c0a;
+      color: white;
+      text-align: center;
+      padding: 4rem 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      color: #b89a5a;
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+    .hero p {
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      color: #aaa;
+      line-height: 1.9;
+      max-width: 500px;
+      margin: 0 auto 2rem;
+    }
+    .hero img {
+      width: min(280px, 70vw);
+      margin-bottom: 2rem;
+    }
+
+    /* リンクボタン */
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      border: 1px solid #b89a5a;
+      color: #b89a5a;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      margin: 0.4rem;
+      transition: all 0.2s;
+    }
+    .btn:hover { background: #b89a5a; color: #000; }
+
+    /* セクション */
+    .section {
+      padding: 3rem 1.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .section h2 {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      margin-bottom: 1rem;
+      color: #0d0c0a;
+    }
+    .section p {
+      font-size: 0.9rem;
+      line-height: 1.9;
+      color: #555;
+    }
+
+    /* カードグリッド */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .card {
+      border: 0.5px solid #ddd;
+      padding: 1.5rem;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: #b89a5a; }
+    .card h3 { font-size: 1rem; margin-bottom: 0.5rem; color: #0d0c0a; }
+    .card p { font-size: 0.8rem; color: #777; }
+
+    /* フッター */
+    footer {
+      background: #0d0c0a;
+      color: #777;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.8rem;
+      line-height: 2;
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello World! 1</h1>
-  <h1>Hello World! 2</h1>
-  <h1>Hello World! 3</h1>
-  <h1>Hello World! 4</h1>
-  <h1>Hello World! 5</h1>
+
+  <nav>
+    <a href="index.html" class="logo">日比谷公園前歯科医院</a>
+    <ul>
+      <li><a href="index.html">トップ</a></li>
+      <li><a href="page1.html">診療案内</a></li>
+      <li><a href="page2.html">アクセス</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <img src="image1.svg" alt="歯のイラスト">
+    <h1>日比谷公園前歯科医院</h1>
+    <p>補綴・顎顔面・口蓋裂専門<br>患者さまお一人おひとりに<br>真摯に向き合います。</p>
+    <a href="page1.html" class="btn">診療案内</a>
+    <a href="page2.html" class="btn">アクセス</a>
+  </div>
+
+  <div class="section">
+    <h2>当院について</h2>
+    <p>日比谷公園前に位置する歯科医院です。<br>補綴歯科専門医・顎顔面補綴医・口蓋裂認定師として、高度な専門治療を提供しています。</p>
+    <div class="card-grid">
+      <a href="page1.html" class="card">
+        <h3>診療案内</h3>
+        <p>専門治療・一般診療のご案内</p>
+      </a>
+      <a href="page2.html" class="card">
+        <h3>アクセス</h3>
+        <p>医院の場所・診療時間</p>
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <p>日比谷公園前歯科医院</p>
+    <p>〒xxx-xxxx 東京都千代田区xxx</p>
+    <p>&copy; 2025 Hibiya Park Front Dental Clinic</p>
+  </footer>
+
 </body>
 </html>
