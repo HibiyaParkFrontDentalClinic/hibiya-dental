@@ -56,7 +56,8 @@
       line-height: 1.4;
       vertical-align: middle;
     }
-    /* センタリング要素内のラベルはフロー外へ */
+    /* デプロイ時: .lbl { display: none; } */
+    /* センタリング要素内のラベルはフロー外へ（表示時用・現在非表示） */
     .sec-question .lbl,
     .acc-trigger-title .lbl,
     .acc-trigger-desc .lbl {
@@ -64,7 +65,6 @@
       top: 50%; right: 0;
       transform: translateY(-50%);
     }
-    /* デプロイ時: .lbl { display: none; } */
 
     /* ===== HEADER ===== */
     #header {
@@ -326,16 +326,18 @@
     .acc-inner { padding: 0 22px 22px; background: var(--bg-gray); }
     .acc-links { margin-bottom: 16px; }
     .acc-link {
-      display: flex; align-items: center; gap: 10px;
+      display: flex; align-items: center; justify-content: center;
       padding: 14px 0;
       border-bottom: 1px solid var(--border);
       font-size: 16px; color: var(--text-dark);
-      letter-spacing: 0.03em;
+      letter-spacing: 0.03em; text-align: center;
+      position: relative;
     }
     .acc-link:last-child { border-bottom: none; }
     .acc-link::before {
       content: '›'; color: var(--accent);
-      font-size: 22px; line-height: 1; flex-shrink: 0;
+      font-size: 22px; line-height: 1;
+      position: absolute; left: 0;
     }
     .acc-cta {
       display: flex; align-items: center; justify-content: center; gap: 8px;
@@ -430,34 +432,37 @@
 
     /* 初回来院注釈 */
     .acc-note-first {
-      font-size: 13px; color: var(--header-bg);
-      background: rgba(122,104,40,0.08);
-      border-left: 3px solid var(--accent);
-      padding: 8px 12px; border-radius: 0 4px 4px 0;
-      line-height: 1.75; letter-spacing: 0.03em;
+      font-size: 16px; color: var(--text-dark);
+      background: rgba(122,104,40,0.1);
+      border: 2px solid var(--accent);
+      border-radius: 6px;
+      padding: 16px 18px;
+      line-height: 1.85; letter-spacing: 0.03em;
       margin-bottom: 20px;
+      text-align: center;
     }
 
     /* 電車アクセステーブル */
     .acc-train-table {
       width: 100%; border-collapse: collapse;
-      font-size: 15px; color: var(--text-dark); line-height: 1.7;
+      font-size: 16px; color: var(--text-dark); line-height: 1.7;
     }
     .acc-train-table tr { border-bottom: 1px solid rgba(122,104,40,0.1); }
     .acc-train-table tr:last-child { border-bottom: none; }
     .acc-train-line {
-      font-size: 11px; color: var(--header-bg);
-      letter-spacing: 0.05em; white-space: nowrap;
-      padding: 7px 10px 7px 0; vertical-align: middle;
-      width: 30%;
+      font-size: 16px; color: var(--text-dark);
+      letter-spacing: 0.03em; white-space: nowrap;
+      padding: 9px 10px 9px 0; vertical-align: middle;
+      width: 32%;
     }
     .acc-train-sta {
-      padding: 7px 8px; vertical-align: middle;
+      font-size: 16px; color: var(--text-dark);
+      padding: 9px 8px; vertical-align: middle;
     }
     .acc-train-time {
-      white-space: nowrap; font-weight: 700;
+      white-space: nowrap; font-size: 16px; font-weight: 700;
       color: var(--accent); text-align: right;
-      padding: 7px 0 7px 8px; vertical-align: middle;
+      padding: 9px 0 9px 8px; vertical-align: middle;
     }
 
     /* Google Maps埋め込み */
@@ -497,6 +502,11 @@
       font-size: 13px; color: var(--text-mid);
       line-height: 1.8; letter-spacing: 0.03em;
     }
+    .acc-youtube-embed {
+      position: relative; width: 100%; aspect-ratio: 16 / 9;
+      border-radius: 6px; overflow: hidden;
+      margin-bottom: 10px;
+    }
 
     /* LINE案内テキスト */
     .line-note {
@@ -513,6 +523,79 @@
       border-radius: 24px; font-size: 15px;
       font-weight: 700; color: #fff; min-height: 48px;
     }
+
+    /* ===== 保険診療アコーディオン ===== */
+    .hoken-acc-wrap {
+      background: var(--bg-gray);
+      border-top: 1px solid var(--border);
+    }
+    .hoken-acc-trigger {
+      width: 100%; padding: 18px 22px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: none; border: none; cursor: pointer;
+      text-align: left;
+    }
+    .hoken-acc-label {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 16px; font-weight: 700;
+      color: var(--header-bg); letter-spacing: 0.05em;
+    }
+    .hoken-acc-icon {
+      width: 28px; height: 28px; flex-shrink: 0;
+      border: 1.5px solid var(--header-bg);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--header-bg); font-size: 13px;
+      transition: transform 0.3s, background 0.2s;
+    }
+    .hoken-acc-wrap.open .hoken-acc-icon {
+      transform: rotate(90deg);
+      background: var(--header-bg); color: #fff;
+    }
+    .hoken-acc-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    .hoken-acc-wrap.open .hoken-acc-body {
+      max-height: 9999px;
+    }
+    .hoken-acc-inner {
+      padding: 4px 22px 28px;
+    }
+    /* 保険内テーブル */
+    .hi-section { margin-bottom: 24px; }
+    .hi-section-title {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 15px; font-weight: 700;
+      color: var(--header-bg);
+      border-left: 3px solid var(--accent);
+      padding-left: 10px; margin-bottom: 10px; line-height: 1.5;
+    }
+    .hi-block {
+      background: #fff; border-radius: 6px;
+      padding: 14px 16px; font-size: 14px;
+      color: var(--text-dark); line-height: 1.9;
+    }
+    .hi-block p + p { margin-top: 6px; }
+    .hi-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 13px; table-layout: fixed;
+    }
+    .hi-table th, .hi-table td {
+      padding: 8px 10px; border: 1px solid var(--border);
+      line-height: 1.6; vertical-align: middle;
+    }
+    .hi-table th {
+      background: rgba(122,104,40,0.07);
+      font-weight: 700; color: var(--text-mid); text-align: left;
+    }
+    .hi-table td { color: var(--text-dark); }
+    .hi-table-overview th { width: 38%; }
+    .hi-table-kijun th:first-child { width: 68%; text-align: left; }
+    .hi-table-kijun th:last-child  { width: 32%; text-align: center; }
+    .hi-table-kijun td:first-child { text-align: left; }
+    .hi-table-kijun td:last-child  { text-align: center; color: var(--text-mid); }
+    .hi-note { font-size: 12px; color: var(--text-light); margin-top: 8px; line-height: 1.7; }
 
     /* ===== FOOTER ===== */
     #footer {
@@ -575,7 +658,7 @@
       <li><a href="https://hibiya-denture.jp/" target="_blank" rel="noopener">入れ歯<span class="nav-sub">DENTURE</span></a></li>
       <li><a href="treatment.html">一般診療<span class="nav-sub">TREATMENT</span></a></li>
       <li><a href="hyaluronic.html">ヒアルロン酸<span class="nav-sub">HYALURONIC</span></a></li>
-      <li><a href="botox.html">エラボト<span class="nav-sub">BOTOX</span></a></li>
+      <li><a href="botox.html">歯ぎしり<span class="nav-sub">BOTULINUM</span></a></li>
       <li><a href="access.html">アクセス<span class="nav-sub">ACCESS</span></a></li>
     </ul>
   </nav>
@@ -638,7 +721,7 @@
   <!-- ===== SEC1: アコーディオン ===== -->
   <section id="sec1">
     <div class="sec1-header">
-      <p class="sec-question">ホームページをご覧いただきありがとうございます<br>どちらをご希望でしょうか？<span class="lbl">SEC1T</span></p>
+      <p class="sec-question">ホームページをご覧いただきありがとうございます<br>お悩みやご希望はどちらでしょうか？<span class="lbl">SEC1T</span></p>
     </div>
 
     <div class="accordion">
@@ -655,10 +738,10 @@
           <div class="acc-inner">
             <div class="acc-links">
               <a class="acc-link" href="pages/C1a.html">入れ歯が痛くて食事が辛い<span class="lbl">C1L1</span></a>
-              <a class="acc-link" href="pages/C1b.html">人前で外れるのが不安</a>
-              <a class="acc-link" href="pages/C1c.html">硬いものが噛めない</a>
-              <a class="acc-link" href="pages/C1d.html">金属が見えて恥ずかしい</a>
-              <a class="acc-link" href="pages/C1e.html">他院で断られた難症例</a>
+              <a class="acc-link" href="pages/C1b.html">人前で外れるのが不安<span class="lbl">C1L2</span></a>
+              <a class="acc-link" href="pages/C1c.html">硬いものが噛めない<span class="lbl">C1L3</span></a>
+              <a class="acc-link" href="pages/C1d.html">金属が見えて恥ずかしい<span class="lbl">C1L4</span></a>
+              <a class="acc-link" href="pages/C1e.html">他院で断られた難症例<span class="lbl">C1L5</span></a>
             </div>
             <a class="acc-cta" href="https://hibiya-denture.jp/">一覧を見る<span class="lbl">C1CTA</span></a>
           </div>
@@ -677,10 +760,10 @@
           <div class="acc-inner">
             <div class="acc-links">
               <a class="acc-link" href="pages/C2a.html">歯のホワイトニング<span class="lbl">C2L1</span></a>
-              <a class="acc-link" href="pages/C2b.html">ヒアルロン酸注射（ほうれい線）</a>
-              <a class="acc-link" href="pages/C2c.html">ヒアルロン酸注射（唇）</a>
-              <a class="acc-link" href="pages/C2d.html">審美セラミック治療</a>
-              <a class="acc-link" href="pages/C2e.html">ハイドラフェイシャル</a>
+              <a class="acc-link" href="pages/C2b.html">ヒアルロン酸注射（ほうれい線）<span class="lbl">C2L2</span></a>
+              <a class="acc-link" href="pages/C2c.html">ヒアルロン酸注射（唇）<span class="lbl">C2L3</span></a>
+              <a class="acc-link" href="pages/C2d.html">審美セラミック治療<span class="lbl">C2L4</span></a>
+              <a class="acc-link" href="pages/C2e.html">ハイドラフェイシャル<span class="lbl">C2L5</span></a>
             </div>
             <a class="acc-cta" href="hyaluronic.html">一覧を見る<span class="lbl">C2CTA</span></a>
           </div>
@@ -699,10 +782,10 @@
           <div class="acc-inner">
             <div class="acc-links">
               <a class="acc-link" href="pages/C3a.html">マウスピース（ナイトガード）製作<span class="lbl">C3L1</span></a>
-              <a class="acc-link" href="pages/C3b.html">エラボツリヌス注射について</a>
-              <a class="acc-link" href="pages/C3c.html">歯ぎしりの原因と対策</a>
-              <a class="acc-link" href="pages/C3d.html">頭痛・肩こりとの関係</a>
-              <a class="acc-link" href="pages/C3e.html">リンパマッサージ・ストレスケア</a>
+              <a class="acc-link" href="pages/C3b.html">エラボツリヌス注射について<span class="lbl">C3L2</span></a>
+              <a class="acc-link" href="pages/C3c.html">歯ぎしりの原因と対策<span class="lbl">C3L3</span></a>
+              <a class="acc-link" href="pages/C3d.html">頭痛・肩こりとの関係<span class="lbl">C3L4</span></a>
+              <a class="acc-link" href="pages/C3e.html">リンパマッサージ・ストレスケア<span class="lbl">C3L5</span></a>
             </div>
             <a class="acc-cta" href="botox.html">一覧を見る<span class="lbl">C3CTA</span></a>
           </div>
@@ -721,10 +804,10 @@
           <div class="acc-inner">
             <div class="acc-links">
               <a class="acc-link" href="pages/C4a.html">むし歯治療<span class="lbl">C4L1</span></a>
-              <a class="acc-link" href="pages/C4b.html">歯周病治療</a>
-              <a class="acc-link" href="pages/C4c.html">親知らずの治療・抜歯</a>
-              <a class="acc-link" href="pages/C4d.html">根管治療（神経の治療）</a>
-              <a class="acc-link" href="pages/C4e.html">予防歯科・定期メインテナンス</a>
+              <a class="acc-link" href="pages/C4b.html">歯周病治療<span class="lbl">C4L2</span></a>
+              <a class="acc-link" href="pages/C4c.html">親知らずの治療・抜歯<span class="lbl">C4L3</span></a>
+              <a class="acc-link" href="pages/C4d.html">根管治療（神経の治療）<span class="lbl">C4L4</span></a>
+              <a class="acc-link" href="pages/C4e.html">予防歯科・定期メインテナンス<span class="lbl">C4L5</span></a>
             </div>
             <a class="acc-cta" href="treatment.html">一覧を見る<span class="lbl">C4CTA</span></a>
           </div>
@@ -768,8 +851,8 @@
             </p>
             <br>
             <div class="acc-links">
-              <a class="acc-link" href="pages/S1.html">院長プロフィール・経歴</a>
-              <a class="acc-link" href="pages/S1.html#license">専門医資格について</a>
+              <a class="acc-link" href="pages/S1.html">院長プロフィール・経歴<span class="lbl">S1L1</span></a>
+              <a class="acc-link" href="pages/S1.html#license">専門医資格について<span class="lbl">S1L2</span></a>
             </div>
           </div>
         </div>
@@ -789,8 +872,8 @@
             </p>
             <br>
             <div class="acc-links">
-              <a class="acc-link" href="pages/S2.html">難症例への対応について</a>
-              <a class="acc-link" href="pages/S2.html#univ">大学病院との連携体制</a>
+              <a class="acc-link" href="pages/S2.html">難症例への対応について<span class="lbl">S2L1</span></a>
+              <a class="acc-link" href="pages/S2.html#univ">大学病院との連携体制<span class="lbl">S2L2</span></a>
             </div>
           </div>
         </div>
@@ -810,7 +893,7 @@
             </p>
             <br>
             <div class="acc-links">
-              <a class="acc-link" href="pages/S3.html">入れ歯の種類を見る</a>
+              <a class="acc-link" href="pages/S3.html">入れ歯の種類を見る<span class="lbl">S3L1</span></a>
             </div>
           </div>
         </div>
@@ -856,54 +939,145 @@
       <div>
         <p class="acc-row-label">アクセス<span class="lbl">INFO2</span></p>
         <table class="acc-train-table">
-          <tr><td class="acc-train-line">都営三田線</td><td class="acc-train-sta">内幸町駅 A5出口</td><td class="acc-train-time">直結</td></tr>
+          <tr><td class="acc-train-line">都営三田線</td><td class="acc-train-sta">内幸町駅 A6出口</td><td class="acc-train-time">直結</td></tr>
           <tr><td class="acc-train-line">東京メトロ</td><td class="acc-train-sta">霞ヶ関駅</td><td class="acc-train-time">徒歩4分</td></tr>
           <tr><td class="acc-train-line">東京メトロ</td><td class="acc-train-sta">日比谷駅</td><td class="acc-train-time">徒歩6分</td></tr>
           <tr><td class="acc-train-line">JR</td><td class="acc-train-sta">新橋駅</td><td class="acc-train-time">徒歩7分</td></tr>
         </table>
       </div>
       <div>
-        <p class="acc-note-first">🚃 初めてご来院の方は、都営三田線<br>内幸町駅（A5出口）からが迷わずお越しいただけます。</p>
+        <p class="acc-note-first">🚃 初めてご来院の方は、都営三田線<br>内幸町駅（A6出口）からが迷わずお越しいただけます。</p>
         <p class="acc-row-label">診療時間</p>
-        <p class="acc-row-val">9:30〜13:00 / 14:00〜18:30<br>（月〜土）&emsp;日・祝 休診<span class="lbl">INFO3</span></p>
+        <p class="acc-row-val">9:30〜13:00 / 14:00〜18:30　月〜土　日・祝 休診<span class="lbl">INFO3</span></p>
       </div>
     </div>
     <!-- Google Maps（後日API接続） -->
     <div class="acc-map-embed">
       <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.6!2d139.7554!3d35.6716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188b7d4a5c4c3d%3A0x0!2z5pel5pys5Lq6!5e0!3m2!1sja!2sjp!4v1700000000000"
-        width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy"
+        src="https://www.google.com/maps?q=富国生命ビル,東京都千代田区内幸町2-2-2&hl=ja&output=embed"
+        width="100%" height="260" style="border:0;" allowfullscreen="" loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
-        title="日比谷公園前歯科医院 地図（後日API接続）">
+        title="日比谷公園前歯科医院 地図">
       </iframe>
-      <p class="acc-map-note"><span class="lbl">MAP</span>※後日Google Maps API接続予定</p>
     </div>
 
     <!-- YouTube 行き方動画（2本） -->
     <div class="acc-youtube-wrap">
       <div class="acc-youtube-item">
-        <div class="acc-youtube-placeholder">
-          <span class="acc-youtube-icon">▶</span>
-          <p class="acc-youtube-label">行き方動画①<span class="lbl">YT1</span></p>
+        <div class="acc-youtube-embed">
+          <iframe src="https://www.youtube.com/embed/TkxxiLd0Z-Y"
+            width="100%" height="100%" style="border:0; position:absolute; top:0; left:0;"
+            allowfullscreen loading="lazy"
+            title="JR新橋駅から富国生命ビルへの行き方<span class="lbl">YT1</span>">
+          </iframe>
         </div>
-        <p class="acc-youtube-desc">テキストテキストテキストテキスト<br>テキストテキストテキストテキスト</p>
+        <p class="acc-youtube-desc">JR新橋駅より徒歩約7分。新橋駅西口を出て、西の方に進み、日比谷通りを北へ直進し、内幸町交差点を目指します。富国生命ビル地下1階が当院です。</p>
       </div>
       <div class="acc-youtube-item">
-        <div class="acc-youtube-placeholder">
-          <span class="acc-youtube-icon">▶</span>
-          <p class="acc-youtube-label">行き方動画②<span class="lbl">YT2</span></p>
+        <div class="acc-youtube-embed">
+          <iframe src="https://www.youtube.com/embed/GNV_mVuVCUs"
+            width="100%" height="100%" style="border:0; position:absolute; top:0; left:0;"
+            allowfullscreen loading="lazy"
+            title="東京メトロ霞ヶ関駅から富国生命ビルへの行き方">
+          </iframe>
         </div>
-        <p class="acc-youtube-desc">テキストテキストテキストテキスト<br>テキストテキストテキストテキスト</p>
+        <p class="acc-youtube-desc">東京メトロ霞ヶ関駅より徒歩約4分。路線によって出口や方向が異なり迷いやすいため、まず地上に出て日比谷公園を確認するのがおすすめです。当院は日比谷公園の南側、富国生命ビル地下1階にあります。<span class="lbl">YT2</span></p>
       </div>
     </div>
 
     <!-- LINEボタン -->
-    <div style="text-align:center; margin-top: 28px;">
+    <div style="text-align:center; margin-top: 28px; margin-bottom: 28px;">
       <p class="line-note">お問い合わせはLINEをお使いください<br>1営業日以内でお返事します。</p>
       <a class="access-line-btn" href="https://page.line.me/547kihip" target="_blank" rel="noopener">
         💬 LINE<span class="lbl">CTA2</span>
       </a>
     </div>
+
+    <!-- 保険診療について（アコーディオン） -->
+    <div class="hoken-acc-wrap" id="hoken-acc">
+      <button class="hoken-acc-trigger" onclick="toggleHoken()" aria-expanded="false">
+        <span class="hoken-acc-label">当院の保険診療について</span>
+        <span class="hoken-acc-icon">›</span>
+      </button>
+      <div class="hoken-acc-body">
+        <div class="hoken-acc-inner">
+
+          <div class="hi-section">
+            <h3 class="hi-section-title">保険医療機関の概要</h3>
+            <table class="hi-table hi-table-overview">
+              <tr><th>医療機関名</th><td>日比谷公園前歯科医院</td></tr>
+              <tr><th>所在地</th><td>〒100-0011<br>東京都千代田区内幸町2-2-2<br>富国生命ビル 地下1階</td></tr>
+              <tr><th>管理者（院長）</th><td>乙丸 貴史</td></tr>
+              <tr><th>診療科目</th><td>歯科・口腔外科・小児歯科・矯正歯科</td></tr>
+              <tr><th>診療時間</th><td>9:30〜13:00 / 14:00〜18:30<br>（月〜土）　日・祝 休診</td></tr>
+            </table>
+          </div>
+
+          <div class="hi-section">
+            <h3 class="hi-section-title">施設基準・届出事項</h3>
+            <div class="hi-block"><p>当院は以下の施設基準について、関東信越厚生局長に届出を行っています。</p></div>
+            <table class="hi-table hi-table-kijun" style="margin-top:10px;">
+              <tr><th>施設基準名称</th><th>受理番号</th></tr>
+              <tr><td>歯科初診料（歯科外来診療環境体制加算）</td><td>第24237号</td></tr>
+              <tr><td>歯科外来診療安全対策加算１</td><td>第614961号</td></tr>
+              <tr><td>歯科外来診療感染対策加算２</td><td>第614962号</td></tr>
+              <tr><td>歯科疾患管理料</td><td>第24510号</td></tr>
+              <tr><td>口腔管理体制強化加算（か強診）</td><td>第616217号</td></tr>
+              <tr><td>歯科訪問診療料</td><td>第24176号</td></tr>
+              <tr><td>口腔細菌定量検査</td><td>第610966号</td></tr>
+              <tr><td>咀嚼能力検査</td><td>第617515号</td></tr>
+              <tr><td>歯科口腔リハビリテーション料２</td><td>第24239号</td></tr>
+              <tr><td>手術用顕微鏡加算</td><td>第24511号</td></tr>
+              <tr><td>口腔粘膜処置</td><td>第52959号</td></tr>
+              <tr><td>う蝕無痛化治療加算</td><td>第52960号</td></tr>
+              <tr><td>歯科技工士連携加算１</td><td>第610965号</td></tr>
+              <tr><td>歯科技工士連携加算２</td><td>第610964号</td></tr>
+              <tr><td>光学印象</td><td>第610963号</td></tr>
+              <tr><td>歯科技工加算（CAD/CAM冠）</td><td>第24178号</td></tr>
+              <tr><td>GTR法</td><td>第24177号</td></tr>
+              <tr><td>歯根端切除手術</td><td>第52961号</td></tr>
+              <tr><td>根切術顕微鏡使用加算</td><td>第24512号</td></tr>
+              <tr><td>手術用光学機器加算</td><td>第52958号</td></tr>
+              <tr><td>補綴物維持管理料</td><td>第24179号</td></tr>
+              <tr><td>歯科外来在宅ベースアップ評価料Ⅰ</td><td>第611371号</td></tr>
+            </table>
+            <p class="hi-note">※届出内容は変更になる場合があります。最新情報は受付にてご確認ください。</p>
+          </div>
+
+          <div class="hi-section">
+            <h3 class="hi-section-title">明細書の無償発行について</h3>
+            <div class="hi-block">
+              <p>患者さまのご要望に応じて、診療報酬点数等が記載された<strong>明細書を無償で発行</strong>いたします。</p>
+              <p>ご希望の場合は受付窓口へお申し出ください。</p>
+            </div>
+          </div>
+
+          <div class="hi-section">
+            <h3 class="hi-section-title">一部負担金について</h3>
+            <div class="hi-block">
+              <p>保険診療の自己負担割合は、年齢や所得により異なります（1〜3割）。</p>
+              <p>受診の際は<strong>マイナンバーカード（または保険証・医療証）</strong>を必ずご持参ください。</p>
+            </div>
+          </div>
+
+          <div class="hi-section">
+            <h3 class="hi-section-title">個人情報の取り扱いについて</h3>
+            <div class="hi-block">
+              <p>当院は個人情報保護法および関係法令を遵守し、患者さまの個人情報を適切に管理いたします。取得した個人情報は診療・保険請求・患者さまへのご連絡の目的にのみ利用し、法令に定める場合を除き第三者へは提供しません。</p>
+            </div>
+          </div>
+
+          <div class="hi-section">
+            <h3 class="hi-section-title">院内感染防止対策について</h3>
+            <div class="hi-block">
+              <p>高圧蒸気滅菌（オートクレーブ）・使い捨て器材の使用・手指消毒・マスク・ゴーグルの着用・診療室の定期清掃・換気など、感染防止対策を徹底しております。</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
   </section>
 
   <!-- ===== FOOTER ===== -->
@@ -958,6 +1132,14 @@
     window.addEventListener('scroll', () => {
       ctaBar.classList.toggle('visible', window.scrollY > window.innerHeight * 0.75);
     }, { passive: true });
+
+    // 保険診療アコーディオン
+    function toggleHoken() {
+      const wrap = document.getElementById('hoken-acc');
+      const btn = wrap.querySelector('.hoken-acc-trigger');
+      const isOpen = wrap.classList.toggle('open');
+      btn.setAttribute('aria-expanded', isOpen);
+    }
 
     // サイト内検索
     function handleSiteSearch(e) {
